@@ -5,14 +5,16 @@ public class TesteProduto {
         Produto p = new Produto();
 
 
-        System.out.println("preco 1: " + p.preco );
-
-        //p.preco = -50.0;
-
-        System.out.println("preco 2: " + p.preco );
 
 
-    }
+
+            p.setPreco(-50.0);
+
+
+            System.out.println("preco : " + p.getPreco());
+
+
+        }
 
 
 
