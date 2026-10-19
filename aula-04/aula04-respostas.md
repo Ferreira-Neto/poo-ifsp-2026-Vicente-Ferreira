@@ -40,9 +40,12 @@ Por que a JVM se comporta assim
 Diferente de algumas linguagens que permitiriam esse acesso silenciosamente (lendo um espaço de memória "vizinho" por engano, o que pode causar bugs graves e imprevisíveis), o Java faz uma verificação automática de limites toda vez que um array é acessado por índice. Se o índice pedido estiver fora do intervalo 0 até length - 1, a JVM interrompe a execução imediatamente e lança essa exceção, em vez de permitir um acesso inválido à memória.  
 Isso é uma proteção de segurança e de correção: o erro acontece "alto e claro", no exato momento e linha em que o problema ocorreu (SomaDiagonalMatriz.java:18), facilitando identificar e corrigir a causa — em vez de deixar o programa continuar rodando com dados corrompidos ou resultados imprevisíveis.  
 
-• A explicação da IA relaciona a exceção com o conceito de limites de um array
-discutido na teoria da aula? Reverta a alteração após o teste.
+• A explicação da IA relaciona a exceção com o conceito de limites de um array  
+discutido na teoria da aula? Reverta a alteração após o teste.  
 
+- Sim, a explicação conecta o erro prático diretamente ao conceito de limites de arrays, mostrando que os índices válidos para um tamanho 3 são apenas 0, 1 e 2.
+O comando j + 1 forçou um acesso indevido à posição 3 (matriz[2][3]). A JVM atuou conforme o princípio de segurança, bloqueando imediatamente o programa para evitar acessos inválidos à memória.
 
+## 3.3 Atividade 3: Exercícios HackerRank  
 
 
