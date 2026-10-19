@@ -48,4 +48,4 @@ O comando j + 1 forçou um acesso indevido à posição 3 (matriz[2][3]). A JVM 
 
 ## 3.3 Atividade 3: Exercícios HackerRank  
 
-
+https://github.com/Ferreira-Neto/poo-ifsp-2026-Vicente-Ferreira/tree/main/hackerrank/src/semana04
