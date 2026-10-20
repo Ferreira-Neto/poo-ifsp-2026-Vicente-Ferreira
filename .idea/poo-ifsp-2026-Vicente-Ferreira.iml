@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/aula-04/entidades" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/aula-07/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/aula-04" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/aula-10" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/aula-04/Energia.java" />
     </content>
     <orderEntry type="inheritedJdk" />

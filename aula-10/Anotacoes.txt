@@ -1,0 +1,10 @@
+- Atributos: nome, cpf, salario
+
+- Método:
+
+- public String getNome() { return nome; }
+- public String getCpf() { return cpf; }
+- public double getSalario() { return salario; }
+- public double calcularBonus() { return salario * 0.10; }
+
+
