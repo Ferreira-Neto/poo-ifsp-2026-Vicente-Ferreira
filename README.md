@@ -11,7 +11,9 @@ Repositório de exercícios da disciplina de Programacao Orientada a Objetos.
 * [Aula 08](./aula-08)
 * [Aula 09](./aula-09)
 * [Aula 10](./aula-10)
-
+* [Aula 11](./aula-11)
+* [Aula 12](./aula-12)
+* [Aula 13](./aula-13)
 
 Hackerrank
 
