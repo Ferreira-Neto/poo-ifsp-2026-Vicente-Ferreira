@@ -18,4 +18,10 @@ public class Funcionario {
         return salario * 0.10;
     }
 
+@Override
+public String toString() {
+        return nome + " (" + cpf + ") - R$ " + salario;
+}
+
+
 }

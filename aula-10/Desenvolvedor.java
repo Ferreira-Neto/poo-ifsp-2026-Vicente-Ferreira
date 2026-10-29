@@ -1,23 +1,15 @@
-public class Desenvolvedor {
+public class Desenvolvedor extends Funcionario {
 
-
-    private String nome;
-    private String cpf;
-    private double salario;
     private String linguagemPrincipal;
 
     public Desenvolvedor(String nome, String cpf, double salario,
                          String linguagemPrincipal) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.salario = salario;
+
+        super( nome, cpf, salario );
         this.linguagemPrincipal = linguagemPrincipal;
     }
 
-    public String getNome() { return nome; }
-    public String getCpf() { return cpf; }
-    public double getSalario() { return salario; }
-    public String getLinguagemPrincipal() { return linguagemPrincipal; }
+    public String
 
     public double calcularBonus() {
         return salario * 0.10;
