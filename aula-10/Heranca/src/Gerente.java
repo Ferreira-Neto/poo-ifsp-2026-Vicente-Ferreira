@@ -4,10 +4,10 @@ public class Gerente extends Funcionario {
 
     public Gerente( String nome, String cpf, double salario, int numeroFuncionarios )   {
 
-        super(nome, cpf, salario);
+        super( nome, cpf, salario );
         this.numeroFuncionarios = numeroFuncionarios;
-
     }
+
     public int getNumeroFuncionarios() { return numeroFuncionarios; }
 
 @Override
