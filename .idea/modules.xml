@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/aula-10/Heranca/Heranca.iml" filepath="$PROJECT_DIR$/aula-10/Heranca/Heranca.iml" />
       <module fileurl="file://$PROJECT_DIR$/hackerrank/hackerrank.iml" filepath="$PROJECT_DIR$/hackerrank/hackerrank.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/poo-ifsp-2026-Vicente-Ferreira.iml" filepath="$PROJECT_DIR$/.idea/poo-ifsp-2026-Vicente-Ferreira.iml" />
     </modules>
