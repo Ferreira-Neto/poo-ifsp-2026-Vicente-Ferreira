@@ -30,15 +30,18 @@ profissional, e quais problemas de manutenção isso costuma causar em sistemas 
    _• Registre a resposta gerada pela IA:_  
 
    ### Falta de Validação e Controle:  
-   Com um atributo público, qualquer trecho de código pode atribuir qualquer valor a ele a qualquer momento (ex.: usuario.idade = -50; ou pedido.status = null;).  
+   Com um atributo público, qualquer trecho de código pode atribuir qualquer valor a ele a qualquer momento (ex.: usuario.idade = -50;  
+   ou pedido.status = null;).  
    Utilizando métodos setters, você pode encapsular regras de negócio e validações para garantir que o objeto nunca fique em um estado inconsistente.  
    
    ### Acoplamento Forte e Fragilidade (O problema do Refatoramento):  
    Atributos públicos expõem diretamente a representação interna da sua classe.  
-   Se você decidir mudar a forma como um dado é armazenado (por exemplo, transformar um campo String nomeCompleto em dois campos String primeiroNome e String sobrenome),  
+   Se você decidir mudar a forma como um dado é armazenado (por exemplo,  
+   transformar um campo String nomeCompleto em dois campos String primeiroNome e String sobrenome),  
    qualquer código externo que acessava o campo público diretamente quebrará, exigindo uma reescrita em massa.  
    Impossibilidade de Adicionar Efeitos Colaterais (Side Effects):  
-   Com métodos de acesso, você pode executar lógicas adicionais no momento em que um valor é lido ou alterado, como:  
+   Com métodos de acesso, você pode executar lógicas adicionais no momento em que um valor é lido ou alterado,  
+   como:  
    Disparar eventos de notificação.  
    Atualizar caches ou invalidar dados derivados.  
    Registrar logs de auditoria (ex.: “O usuário X alterou o saldo às 14:00”).  
@@ -180,3 +183,124 @@ _4. Apoio de IA: Com o apoio de uma IA (ex: Claude, ChatGPT, Gemini), pergunte q
    ***Dentro do construtor, o parâmetro nome tem o mesmo nome do atributo e o esconde (shadowing).  
    Por isso nome = nome atribui o parâmetro a ele mesmo,  
    e o atributo fica com null e 0. Usando this.nome = nome o Java entende que o da esquerda é o atributo.***  
+
+### Atividade 4: Construtor padrão x construtor parametrizado
+
+_1. Por que o Java não gerou um construtor padrão automaticamente para a classe Livro antes do passo 2?_  
+
+***Porque o compilador só gera o construtor padrão implícito quando a classe não declara nenhum construtor.***
+
+_2. Em que momento o construtor padrão de uma classe deixa de ser gerado automaticamente pelo compilador?_  
+
+***No momento em que a classe declara qualquer construtor, com ou sem parâmetros.***
+
+_3. Apoio de IA: Com o apoio de uma IA (ex: Claude, ChatGPT, Gemini), pergunte o que é  
+   o "construtor padrão implícito"gerado pelo compilador Java e em quais condições exatas ele  
+   deixa de existir._  
+
+   _• Informe o prompt exato que você utilizou:_  
+
+   ***O que é o "construtor padrão implícito"gerado pelo compilador Java e em quais condições exatas ele  
+   deixa de existir?***  
+
+   _• Registre a resposta gerada pela IA:_  
+
+É um construtor sem parâmetros que o compilador Java cria automaticamente quando você não escreve nenhum construtor na classe.  
+
+O que esse construtor faz:  
+Chama super(): executa o construtor sem parâmetros da superclasse (Object, quando não há herança explícita).  
+Não inicializa nada com valores seus: os atributos ficam com os valores padrão do tipo. São null para objetos,  
+0 para números e false para boolean. Isso acontece na criação do objeto, não por causa do construtor.  
+Tem a mesma visibilidade da classe: em public class, o construtor é public. Em uma classe sem modificador (pacote), é package-private.  
+
+Em que condição ele existe  
+Ele só é gerado se a classe não declarar nenhum construtor.  
+Quando ele deixa de existir  
+Ele deixa de ser gerado assim que você declara qualquer construtor.  
+
+Por que o Java faz assim
+O objetivo é dar ao programador o controle sobre como o objeto pode ser criado. Se você escreveu um construtor com parâmetros,   
+provavelmente quer obrigar que o objeto nasça com esses dados.  
+Se o compilador criasse um padrão extra, seria possível criar objetos incompletos sem querer.  
+
+   _• Registre, com suas palavras, a sua resposta:_  
+
+***O construtor padrão implícito é um construtor sem parâmetros que o compilador cria sozinho quando a classe não declara nenhum construtor.  
+Ele deixa de existir assim que eu escrevo qualquer construtor.***  
+
+
+### Atividade 5: Sobrecarregando construtores 
+
+_1. Como o compilador Java decide qual dos três construtores será chamado em cada new
+   Retangulo(...)?_
+
+***Pela quantidade e tipos dos argumentos, "r1" sem parâmetros,  
+"r2" um double e o "r3" de dois double.***
+
+_2. O que aconteceria se você tentasse criar um quarto construtor Retangulo(double altura)
+   além do Retangulo(double lado) já existente? Teste e registre o erro._  
+
+***Erro = java: constructor Retangulo(double) is already defined in class Retangulo  
+Dá erro de compilação, pois Retangulo(double altura) tem a mesma assinatura de Retangulo(double lado).***
+
+
+
+_3. Apoio de IA: Com o apoio de uma IA (ex: Claude, ChatGPT, Gemini), pergunte por que
+   a assinatura de um método/construtor não considera o nome dos parâmetros, apenas seus
+   tipos e quantidade, e peça um exemplo de sobrecarga que causa ambiguidade._
+
+   _• Informe o prompt exato que você utilizou:_  
+***Por que em java a assinatura de um método/construtor não considera o nome dos parâmetros, apenas seus
+tipos e quantidade? De um exemplo de sobrecarga que causa ambiguidade***
+
+   _• Registre a resposta gerada pela IA:_  
+
+O compilador escolhe qual método ou construtor chamar olhando para a chamada,  
+e a chamada só traz os valores dos argumentos, não os nomes dos parâmetros.  
+
+### Chamada posicional e não nomeada:  
+Em Java, os argumentos são passados para um método com base em suas posições,  
+e não em seus nomes (diferente de linguagens como Python ou C#, que suportam argumentos nomeados).  
+Quando você chama soma(5, 10), para o compilador e para a Máquina Virtual Java (JVM)  
+o que importa é que são dois valores inteiros (int, int), e não como eles foram nomeados na declaração  
+(a e b versus x e y).  
+
+### Histórico e o Bytecode:  
+Historicamente, os nomes das variáveis locais e dos parâmetros não eram preservados  
+no arquivo .class compilado — a JVM armazena apenas os tipos para manter o bytecode otimizado e compacto.  
+Embora a partir do Java 8 seja possível preservar os nomes dos parâmetros usando a flag -compiler (-parameters),  
+a especificação da linguagem manteve que os nomes não definem a identidade do método, garantindo a compatibilidade  
+binária.  
+
+### Manutenibilidade: 
+Se os nomes dos parâmetros fizessem parte da assinatura, renomear um parâmetro em uma biblioteca de terceiros  
+quebraria todos os códigos que dependem dela, mesmo que os tipos e a lógica permanecessem idênticos.  
+
+Exemplos de sobrecarga que causa ambiguidade
+A sobrecarga é aceita na declaração, mas algumas chamadas não permitem ao compilador decidir.
+Exemplo 1: dois métodos com tipos trocados
+java
+public class Calculadora {
+public void somar(int a, double b) { System.out.println("int, double"); }
+public void somar(double a, int b) { System.out.println("double, int"); }
+
+    public static void main(String[] args) {
+        Calculadora c = new Calculadora();
+        c.somar(1, 2.5);   // OK: só a primeira serve
+        c.somar(1.5, 2);   // OK: só a segunda serve
+        c.somar(1, 2);     // ERRO: ambígua
+    }
+
+
+As declarações compilam, pois as assinaturas são diferentes. O problema está em somar(1, 2): com dois int,  
+as duas versões servem, porque cada uma converte um dos argumentos para double.  
+
+   _• Registre, com suas palavras, a sua resposta:_  
+
+***Os nomes dos parâmetros só existem dentro do método, e quem chama passa apenas valores, sem informar nomes.  
+Por isso o compilador só usa quantidade e tipos para escolher qual versão executar.  
+Se dois métodos têm os mesmos tipos, são considerados iguais, mesmo com nomes diferentes.  
+Também pode haver ambiguidade quando uma chamada serve para duas versões.***
+
+### Atividade 6: Encadeando construtores com this()
+

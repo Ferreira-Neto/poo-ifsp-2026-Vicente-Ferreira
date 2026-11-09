@@ -8,4 +8,10 @@ public class Livro {
         this.titulo = titulo;
         this.paginas = paginas;
     }
+
+    public Livro() { this.titulo = "Sem titulo"; this.paginas = 0; }
+
+    public String getTitulo()   { return titulo; }
+    public int getPaginas() { return paginas; }
+
 }
