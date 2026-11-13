@@ -5,7 +5,7 @@
 - Data:  
 
 
-### Atividade 1:  
+## Atividade 1:  
 _1. Por que o compilador passou a recusar o acesso direto aos atributos depois da mudança para
 private?_  
 - **O modificador private restringe o acesso ao atributo à própria classe Produto.  
@@ -76,7 +76,7 @@ profissional, e quais problemas de manutenção isso costuma causar em sistemas 
 
 
 
-### Atividade 2:
+## Atividade 2:
 _1. O que aconteceu com o preço do produto quando você chamou setPreco(-50.0)? O atributo
 foi alterado?_  
 O atributo não foi alterado. O if (p >= 0) do setter bloqueou a atribuição, e o preço manteve o valor anterior (no TesteProduto, 5.0).  
@@ -140,7 +140,7 @@ _4. Apoio de IA: Com o apoio de uma IA (ex: Claude, ChatGPT, Gemini), pergunte q
    faixa permitida e regras do domínio, como limite de saque no banco ou estoque no e-commerce.  
 
 
-### Atividade 3: O operador this resolvendo conflito de nomes  
+## Atividade 3: O operador this resolvendo conflito de nomes  
 
    1. O que aconteceu com os atributos nome e idade do objeto quando você removeu o this? Por quê?  
    ***Sem o this, nome = nome; atribui o parâmetro a ele mesmo e o atributo nunca é tocado.  
@@ -184,7 +184,7 @@ _4. Apoio de IA: Com o apoio de uma IA (ex: Claude, ChatGPT, Gemini), pergunte q
    Por isso nome = nome atribui o parâmetro a ele mesmo,  
    e o atributo fica com null e 0. Usando this.nome = nome o Java entende que o da esquerda é o atributo.***  
 
-### Atividade 4: Construtor padrão x construtor parametrizado
+## Atividade 4: Construtor padrão x construtor parametrizado
 
 _1. Por que o Java não gerou um construtor padrão automaticamente para a classe Livro antes do passo 2?_  
 
@@ -229,7 +229,7 @@ Se o compilador criasse um padrão extra, seria possível criar objetos incomple
 Ele deixa de existir assim que eu escrevo qualquer construtor.***  
 
 
-### Atividade 5: Sobrecarregando construtores 
+## Atividade 5: Sobrecarregando construtores 
 
 _1. Como o compilador Java decide qual dos três construtores será chamado em cada new
    Retangulo(...)?_
@@ -302,5 +302,88 @@ Por isso o compilador só usa quantidade e tipos para escolher qual versão exec
 Se dois métodos têm os mesmos tipos, são considerados iguais, mesmo com nomes diferentes.  
 Também pode haver ambiguidade quando uma chamada serve para duas versões.***
 
-### Atividade 6: Encadeando construtores com this()
+## Atividade 6: Encadeando construtores com this()
 
+_1. O que acontece se você tentar colocar this(...) como a segunda instrução de um cons
+   trutor, depois de outra linha de código? Teste e registre o erro apresentado pelo compilador._  
+
+***call to this must be first statement in constructor***
+
+_2. Compare esta versão com a da Atividade 5: qual vantagem prática o uso de this() trouxe
+   para a manutenção do código (ex: se a fórmula de inicialização mudasse)?_  
+
+***A lógica de inicialização fica em um único construtor. Se a fórmula ou uma validação mudar,  
+ela é alterada em um só lugar, e os outros construtores herdam a mudança.  
+Na Atividade 5 o mesmo ajuste teria de ser feito em três construtores***
+
+_3. Apoio de IA: Com o apoio de uma IA (ex: Claude, ChatGPT, Gemini), pergunte por que
+   this() precisa obrigatoriamente ser a primeira instrução do construtor e o que o compilador
+   Java faz "por trás dos panos"quando um objeto é criado._  
+
+   _• Informe o prompt exato que você utilizou:_  
+
+***Por que this() precisa obrigatoriamente ser a primeira instrução do construtor e o que o compilador
+Java faz "por trás dos panos"quando um objeto é criado?***  
+
+   _• Registre a resposta gerada pela IA:_  
+
+***Por que this() precisa ser a primeira instrução?  
+A regra existe para garantir uma coisa: a superclasse é totalmente construída antes que qualquer código da  
+subclasse use o objeto.  
+Todo construtor, em algum ponto, precisa chamar um construtor da superclasse (super(...)).  
+Se você não escreve nada, o compilador insere um super() implícito como primeira instrução.  
+Já o this(...) só delega para outro construtor da mesma classe, e é esse outro construtor que vai acabar chamando  
+o super(...). Por isso:  
+Um construtor chama this(...) ou super(...), nunca os dois. Se pudesse ter ambos, a superclasse seria inicializada   
+duas vezes.  
+Quando o construtor começa com this(...), o compilador não insere o super() implícito, porque ele será  
+chamado no construtor delegado.  
+Se houvesse código antes dessa chamada, ele poderia usar um this ainda semi-construído  
+(campos sem inicializar, superclasse inacabada).Por isso o Java proíbe, por exemplo, this(getX()) e dá o erro  
+“cannot reference this before supertype constructor has been called”.  
+Métodos static e valores literais nos argumentos são permitidos.  
+Atualização: a partir do Java 25 (flexible constructor bodies, JEP 513), é permitido ter algumas instruções  
+antes de this(...)/super(...), desde que não usem a instância que ainda está sendo construída (validar argumentos,  
+calcular valores, por exemplo). Ou seja, a ideia de fundo continua a mesma, mas a regra ficou mais flexível.***
+
+   _• Registre, com suas palavras, a sua resposta:_  
+
+***Em Java o this() precisa ser a primeira instrução do construtor porque todo objeto só pode ser usado depois que  
+a sua superclasse foi totalmente construída. O this() apenas repassa o trabalho para outro construtor da mesma classe,  
+e é esse outro construtor que vai chamar o super().  
+Por isso um construtor usa this() ou super(), nunca os dois, e sempre na primeira linha:***  
+
+## Atividade 7: Construtor de cópia usando this()
+
+***1- O new Pessoa(p1) cria um novo objeto no heap. Os valores de p1 são copiados para os atributos do novo objeto,  
+e cada variável aponta para o seu próprio objeto.***  
+
+***2-Em Java, private restringe o acesso por classe, não por objeto. O código dentro de Pessoa pode acessar os atributos privados de qualquer outra instância de Pessoa,  
+como outra.nome.***
+
+
+## Atividade 8: Sobrecarregando métodos comuns
+
+***1-Os parâmetros quantidade e tipos.***
+
+***2-Não, porque possuem a mesma assinatura e só
+diferem no retorno. Erro method somar(int,int) is already defined in class Calculadora***
+
+
+## Atividade 9: Varargs
+
+***1-Não houve ambiguidade o compilador escolheu TesteCalculadora,  
+a linha somar(int a, int b). Na versao: int, int impressa mostra isso, o Java tenta
+primeiro métodos de aridade fixa, sem boxing e sem varargs, e só recorre ao varargs se
+nenhum servir.***  
+
+***2-Dentro do método os numeros se comportam como um array (int[] ) tem .length,  
+é indexável e pode ser percorrido com for-each***
+
+## Atividade 10: Integrando tudo, a classe ContaBancaria
+
+***1-No construtor completo this.titular = titular; separa o atributo do parâmetro
+de mesmo nome.  
+Em this(titular, 0, true); o construtor de um parâmetro repassa para o construtor completo.  
+Em depositar, this.saldo += valor é opcional, porque não há conflito de nomes.
+Serve só para deixar explícito que se trata de um atributo.***
