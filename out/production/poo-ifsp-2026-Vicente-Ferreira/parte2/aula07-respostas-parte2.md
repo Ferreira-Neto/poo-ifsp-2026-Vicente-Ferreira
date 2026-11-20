@@ -86,10 +86,44 @@ isso sugere uma relação de agregação.***
 ##  Atividade 5: Criando a classe Aluno e calculando estatísticas com ArrayList
 
 ***1.Média turma: NaN
-Exception in thread "main" java.lang.NullPointerException  
+Exception in thread "main" java.lang.NullPointerException***
 
-***
-
-***2.***
+***2.Porque o método precisa retornar o Aluno, não só a nota.   
+Guardando apenas a maior nota, perderia o nome e o objeto a quem ela pertence.***
 
 ***3.***
+
+***Prompt: Como reescrever encontrarMelhorAluno() usando Streams do Java (stream(),  
+max()) e comparar com a versão feita com for?***
+
+Versão com Streams  
+java  
+>import java.util.Comparator;  
+public Aluno encontrarMelhorAluno() {  
+return alunos.stream()  
+.max(Comparator.comparingDouble(Aluno::getNota))  
+.orElse(null);  
+}  
+
+O que cada parte faz  
+alunos.stream(): transforma a lista em um fluxo de elementos que podem ser processados em sequência.  
+.max(...): percorre o fluxo e devolve o maior elemento, de acordo com o critério de comparação que você passar.  
+Comparator.comparingDouble(Aluno::getNota): define o critério. Diz que os alunos devem ser comparados pelo valor de getNota().   
+O Aluno::getNota é uma referência de método e equivale a a -> a.getNota().  
+.orElse(null): o max() não devolve um Aluno direto, e sim um Optional<Aluno>,   
+que pode estar vazio (turma sem alunos). O orElse(null) diz: se existir, devolva o aluno; se estiver vazio,  
+devolva null. Isso reproduz o comportamento do for, que também retorna null com a lista vazia.  
+
+Nos dois casos o resultado é o mesmo quando não há empate. O stream é mais conciso e declarativo,   
+enquanto o for mostra passo a passo o raciocínio de “guardar o melhor até agora”, que é justamente   
+o que a reflexão 2 da atividade quer que você entenda.  
+
+Teste para comparar
+
+Use os mesmos alunos do TesteTurma e imprima o resultado das duas versões.  
+Se quiser manter as duas na classe, dê nomes diferentes, por exemplo encontrarMelhorAlunoStream(),  
+e registre que ambas devolvem o mesmo aluno.
+
+***A versão com for percorre a lista e guarda em uma variável o melhor aluno encontrado até o momento,  
+trocando sempre que aparece uma nota maior.  
+A versão com Stream diz diretamente o que se quer, o aluno de maior nota.***
